@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register page</title>
+    <style>
+        body{
+            background-image: url(./bgrr.webp);
+        }
+        #main{
+            display: flex;
+            flex-direction: column;
+            border: 2px solid;
+            border-radius: 5%;
+            height:600px ;
+            width: 27%;
+            padding: 3%;
+            margin-left: 33%;
+            margin-right: 25%;
+            background-color:lightblue;
+            
+        }
+        .one,.two,.three,.four,.five{
+            display: flex;
+            flex-direction: column;
+            margin: 6%;
+            padding: 1%;
+            
+        }
+    </style>
+</head>
+<body>
+
+       <div id="main">
+        <h1> Register Here</h1>
+        <form >
+            <div class="one">
+            <label>Username</label><br>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div class="two">
+            <label>E-mail ID</label><br>
+            <input type="email" name="mail" id="email" placeholder="Give your mail id" required>
+            </div>
+            <div class="three">    
+            <label>mobie Number</label><br>
+            <input type="number" name="mobile" id="mobile" placeholder="Give your mobile number" required>
+            </div>
+            <div class="four">
+            <label>Give Password</label><br>
+            <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <div class="five">   
+            <label>Re-enter Password</label><br>
+            <input type="password" name="password" id="password2" placeholder="Re-enter your password" required>
+            </div>
+           <center> <input type="submit" value="SUBMIT" style="padding: 2%;background-color: rgb(31, 227, 188);"></center>
+        </form>
+
+       </div>
+</body>
+    <script>
+
+        var array=[]
+
+
+        let form=document.forms;
+        form[0].addEventListener("submit",(event)=>{
+            event.preventDefault;
+
+            let user=event.target[0].value;
+            let mail=event.target[1].value;
+            let mobile=event.target[2].value;
+            let pass1=event.target[3].value;
+            let pass2=event.target[4].value;
+
+           
+            var t1=/^[a-zA-Z]/gi
+            if(t1.test(user)){
+                var t2=/^[a-zA-Z0-9._]+@gmail.com$/
+                if(t2.test(mail)){
+                    var t3=/^[6-9]\d{9}$/
+                    if(t3.test(mobile)){
+                        var t4=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-_=+{};:,<.>])(?!.*\s).{8,}$/
+                        if(t4.test(pass1)){
+                            if(pass1===pass2){
+
+                                alert("you've successfully registered")
+                                let object={
+                                    name:user,
+                                    gmail:mail,
+                                    num:mobile,
+                                    password1:pass1,
+                                    password2:pass2
+
+                                }
+
+                                var newarr=JSON.parse(localStorage.getItem("login"));
+                                array=(newarr==null)?[]:newarr;
+                                array.push(object)
+                                localStorage.setItem("login",JSON.stringify(array))
+                                window.open("./login.html")
+                                 
+                            }
+                            else{
+                                alert("Your password didn't match ")
+                            }
+                        }
+                        else{
+                        alert("Your password at least 8 characters and combination of number charcaters special letters")
+                        }
+                    }
+                    else{
+                    alert("Give valid Mobile number")
+                    }
+                }
+                else{
+                alert("Give proper G-Mail")
+                }
+            }
+            else{
+                alert("Please give valid username")
+            }
+            
+        })
+    </script>
+</html>

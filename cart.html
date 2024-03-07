@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cartwindow</title>
+</head>
+<body>
+    <button onclick="window.history.back()" style="background-color: rgb(189, 225, 225); padding: 1% 2% 1% 2%;">back</button>
+    <div style="display: flex; height: 2000px; "></div>
+   <h1 id="price"></h1>
+    <script>
+        
+        let arrey=[]
+        arrey=JSON.parse(localStorage.getItem("cart"))
+
+        let div=document.getElementsByTagName("div")
+        arrey.map((val,ind)=>{
+            
+            var a=document.createElement("div")
+            var a1=document.createElement("div")
+            var a2=document.createElement("div")
+            var a3=document.createElement("div")
+            var a4=document.createElement("div")
+            var a5=document.createElement("div")
+            var a6=document.createElement("div")
+
+            a.innerHTML=val["id"]
+            a1.innerHTML=val["title"]
+            a2.innerHTML=val["price"]
+            a3.innerHTML=val["category"]
+            a4.innerHTML=val["rating"]
+            a5.innerHTML=val["stock"]
+            a6.innerHTML=val["description"]
+
+            var img=document.createElement("img")
+            img.style.height="100px"
+            img.style.width="100px"
+            img.setAttribute("src",val["thumbnail"])
+
+            let remove=document.createElement("button")
+            remove.innerText="Remove from Cart"
+            remove.style.margin="12%"
+            remove.style.padding="3%"
+
+            var dev=document.createElement("div")
+            dev.appendChild(img)
+            dev.appendChild(a)
+            dev.appendChild(a1)
+            dev.appendChild(a2)
+            dev.appendChild(a3)
+            dev.appendChild(a4)
+            dev.appendChild(a5)
+            dev.appendChild(a6)
+            dev.appendChild(remove)
+
+            div[0].appendChild(dev)
+            
+            dev.style.height="26%"
+            dev.style.width="20%"
+            dev.style.border="2px solid"
+            dev.style.backgroundImage="linear-gradient(120deg,lightblue 40%,pink 40%)"
+            dev.style.wordBreak="break-all"
+            dev.style.padding="2%"
+            dev.style.margin="2%"
+
+            remove.addEventListener('click',()=>{
+                arrey.splice(ind,1);
+                //localStorage.clear();
+                window.localStorage.setItem('cart',JSON.stringify(arrey))
+                moon(arrey);
+            })
+           
+       
+        })
+
+
+
+        function moon(arrey){
+            div[0].innerHTML=""
+            arrey.map((val,ind)=>{
+            
+            var a=document.createElement("div")
+            var a1=document.createElement("div")
+            var a2=document.createElement("div")
+            var a3=document.createElement("div")
+            var a4=document.createElement("div")
+            var a5=document.createElement("div")
+            var a6=document.createElement("div")
+
+            a.innerHTML=val["id"]
+            a1.innerHTML=val["title"]
+            a2.innerHTML=val["price"]
+            a3.innerHTML=val["category"]
+            a4.innerHTML=val["rating"]
+            a5.innerHTML=val["stock"]
+            a6.innerHTML=val["description"]
+
+            var img=document.createElement("img")
+            img.style.height="100px"
+            img.style.width="100px"
+            img.setAttribute("src",val["thumbnail"])
+
+            let remove=document.createElement("button")
+            remove.innerText="Remove from Cart"
+            remove.style.margin="12%"
+            remove.style.padding="3%"
+
+            var dev=document.createElement("div")
+            dev.appendChild(img)
+            dev.appendChild(a)
+            dev.appendChild(a1)
+            dev.appendChild(a2)
+            dev.appendChild(a3)
+            dev.appendChild(a4)
+            dev.appendChild(a5)
+            dev.appendChild(a6)
+            dev.appendChild(remove)
+            
+            div[0].appendChild(dev)
+
+
+            dev.style.height="26%"
+            dev.style.width="20%"
+            dev.style.border="2px solid"
+            dev.style.backgroundImage="linear-gradient(120deg,lightblue 40%,pink 40%)"
+            dev.style.wordBreak="break-all"
+            dev.style.padding="2%"
+            dev.style.margin="2%"
+
+
+            remove.addEventListener('click',()=>{
+                arrey.splice(ind,1);
+                window.localStorage.setItem('cart',JSON.stringify(arrey))
+                moon(arrey);
+            })
+           
+       
+        })
+        }
+        var pr=document.getElementById("price")
+        arrey.map((val,ind)=>{
+            pr.innerHTML=ind*val["price"]
+        })
+        
+    </script>
+</body>
+</html>

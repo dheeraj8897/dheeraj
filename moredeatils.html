@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>more details</title>
+</head>
+<body>
+    <div style="border: 2px solid;display: flex;flex-direction: column;margin: 6%;padding: 5%;gap: 15px;background-color: cadetblue; justify-content: space-around; width: 60%;"></div>
+    <script>
+
+ 
+                var div=document.getElementsByTagName("div")
+                
+                let newarr=JSON.parse(localStorage.getItem("seemore"));
+
+
+             
+
+
+
+       
+            var a=document.createElement("div")
+            var a1=document.createElement("div")
+            var a2=document.createElement("div")
+            var a3=document.createElement("div")
+            var a4=document.createElement("div")
+            var a5=document.createElement("div")
+            var a6=document.createElement("div")
+
+            a.innerHTML=newarr["id"]
+            a1.innerHTML=newarr["title"]
+            a2.innerHTML=newarr["price"]
+            a3.innerHTML=newarr["category"]
+            a4.innerHTML=newarr["rating"]
+            a5.innerHTML=newarr["brand"]
+            a6.innerHTML=newarr["description"]
+
+            var img=document.createElement("img")
+            img.style.height="200px"
+            img.style.width="200px"
+            img.setAttribute("src",newarr["thumbnail"])
+            div[0].appendChild(img)
+
+            // var imgg=document.createElement("img")
+            // imgg.style.height="200px"
+            // imgg.style.width="200px"
+            // imgg.setAttribute("src",newarr["images"])
+            // div[0].appendChild(imgg)
+
+            div[0].appendChild(a)
+            div[0].appendChild(a1)
+            div[0].appendChild(a5)
+            div[0].appendChild(a2)
+            div[0].appendChild(a3)
+            div[0].appendChild(a4)
+            div[0].appendChild(a6)
+
+            var but=document.createElement("button")
+            but.innerText="back"
+            but.style.width="20%"
+            but.addEventListener("click",()=>{
+                window.history.back()
+            })
+            div[0].appendChild(but)
+
+    </script>
+</body>
+</html>

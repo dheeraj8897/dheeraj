@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy now</title>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+        .main{
+            border: 1px solid;
+            display: flex;
+            flex-direction: column;
+            margin-left: 20%;
+            margin-right: 20%;
+            padding: 10%;
+            gap: 20px;
+            background-image: radial-gradient(rgb(196, 178, 195) 40%,rgb(176, 192, 195));
+        }
+        .data{
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <section class="main">
+        <div class="data">
+
+        </div>
+        <div class="buts">
+            <label>Quantity</label>
+            <input type="number" min="1" value="1" id="num" onchange="display()"><br><br>
+             Total Price  $<input type="text" id="value">
+            <button style="background-color: rgb(115, 115, 187); padding: 3%; margin-top: 30px; margin-left: 80px; border-radius: 10px;">Place Order</button>
+        </div>
+    </section>
+    <script>
+        var div=document.getElementsByTagName("div")
+                
+            let newarr=JSON.parse(localStorage.getItem("buynow"));
+
+
+            let count=document.getElementById('num');
+            let rate=document.getElementById('value');
+            rate.value=newarr['price'].toString()
+            function display(){
+                if(count.value>=1){
+                    rate.value=(count.value*newarr['price']).toString()
+                }
+            }    
+
+
+
+
+            
+            var a1=document.createElement("div")
+            var a2=document.createElement("div")
+            var a4=document.createElement("div")
+            var a5=document.createElement("div")
+            var a6=document.createElement("div")
+
+          
+            a1.innerHTML=newarr["title"]
+            a2.innerHTML=`Price - ${newarr["price"]} $`
+            a6.innerHTML=`Discount - ${newarr["discountPercentage"]} $`
+            a4.innerHTML=`Rating  -  ${newarr["rating"]}*`
+            a5.innerHTML=`Sold items - ${newarr["stock"]} +`
+
+            var img=document.createElement("img")
+            img.style.height="100px"
+            img.style.width="100px"
+            img.setAttribute("src",newarr["thumbnail"])
+            div[0].appendChild(img)
+
+           
+            div[0].appendChild(a1)
+            div[0].appendChild(a2)
+            div[0].appendChild(a6)
+            div[0].appendChild(a4)
+            div[0].appendChild(a5)
+           
+
+            var but=document.createElement("button")
+            but.innerText="back"
+            but.style.padding="3px"
+            but.style.borderRadius="4px"
+            but.style.backgroundColor="orange"
+            but.addEventListener("click",()=>{
+                window.history.back()
+            })
+            document.body.appendChild(but)
+
+
+
+            // var input=document.getElementById("num")
+            // var v=parseInt(input.value)
+
+            // var val=document.getElementById("value")
+            // val.innerHTML=`Total Price  ${input.value*100}Rs.`
+
+
+
+            var bot=document.getElementsByTagName("button")
+            bot[0].addEventListener("click",()=>{
+                clear()
+                var h3=document.createElement("h1")
+                h3.style.display="flex"
+                h3.style.justifyContent="center"
+                h3.style.backgroundColor="blue"
+                h3.innerText="Your Order is Succesfully Placed "
+                document.body.appendChild(h3)
+
+                var home=document.createElement("button")
+                home.innerText="HOME"
+                home.style.backgroundColor="green"
+                home.style.marginLeft="47%"
+                home.style.padding="2%"
+                home.addEventListener("click",()=>{
+                    window.location.assign("./Dashboard.html")
+                })
+                document.body.appendChild(home)
+
+            })
+            function clear(){
+                document.body.innerHTML=''
+            }
+
+    </script>
+</body>
+</html>
